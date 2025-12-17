@@ -1,6 +1,13 @@
-FROM nginx:alpine
+# Use official Nginx image as base
+FROM nginx:latest
 
-# Copy HTML file to nginx default location
-COPY index.html /usr/share/nginx/html/index.html
+# Remove default nginx static files
+RUN rm -rf /usr/share/nginx/html/*
 
+# Copy our custom app files
+COPY index.html /usr/share/nginx/html/
+
+# Expose port 80
 EXPOSE 80
+
+# Nginx starts by default
